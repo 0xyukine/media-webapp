@@ -3,13 +3,14 @@
 <head>
 	<title>Media Server</title>
 	<style>
-		.image-container {
+		.media-container {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			height: 80vh;
 		}
-		.image-container img {
+		.media-container img,
+    .media-container video {
 			max-width: 100%;
 			max-height: 100%;
 		}
@@ -29,12 +30,14 @@
 </head>
 <body>
 	<h1>Media server</h1>
-	<div class="image-container">
+	<!-- <div class="image-container">
 		<img id="currentImage" src="" alt="Image">
 		<video id="myVideo" controls autoplay>
 			<source id="currentImage" src="" alt="Video" type=video/mp4>
 		</video>
-	</div>
+	</div> -->
+
+  <div class="media-container" id="mediaContainer"></div>
 	
 	<div class="navigation-buttons">
 		<button id="previousButton">Previous</button>
@@ -44,7 +47,7 @@
 	<script src="hammer.min.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script> -->
 	<script>
-		const imagePaths = [
+		const mediaItems = [
 			"images/1.jpg",
 			"images/2.jpg",
 			"images/3.jpg",
@@ -53,36 +56,60 @@
 			];
 		
 		let currentIndex = 0;
-		const imageElement = document.getElementById("currentImage");
+		// const imageElement = document.getElementById("currentImage");
+    const mediaContainer = document.getElementById("mediaContainer")
 		
 		const previousButton = document.getElementById("previousButton");
 		const nextButton = document.getElementById("nextButton");
 		
-		previousButton.addEventListener('click', showPreviousImage);
-		nextButton.addEventListener('click', showNextImage);
+		previousButton.addEventListener('click', showPreviousMedia);
+		nextButton.addEventListener('click', showNextMedia);
 		
 		const hammer = new Hammer(document.body);
 		hammer.get('swipe').set({direction: Hammer.DIRECTION_HORIZONTAL});
-		hammer.on('swipeleft', showNextImage);
-		hammer.on('swiperight', showPreviousImage);
+		hammer.on('swipeleft', showNextMedia);
+		hammer.on('swiperight', showPreviousMedia);
 		
-		function showNextImage() {
-			currentIndex = (currentIndex + 1) % imagePaths.length;
-			updateImage();
-		}
+    function showNextMedia() {
+      currentIndex = (currentIndex + 1) % mediaItems.length;
+      updateMedia();
+    }
 
-		function showPreviousImage() {
-			currentIndex = (currentIndex - 1 + imagePaths.length) % imagePaths.length;
-			updateImage();
-		}
+    function showPreviousMedia() {
+      currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+      updateMedia();
+    }
 
-		function updateImage() {
-			const imagePath = imagePaths[currentIndex];
-			imageElement.src = imagePath;
-			document.getElementById("myVideo").load();
-		}
+    function updateMedia() {
+      const mediaItem = mediaItems[currentIndex];
+      // const {filename} = mediaItem;
+    
+
+      mediaContainer.innerHTML = '';
+
+      const imageExtensions = ['jpg', 'jpeg', 'png'];
+      const videoExtensions = ['mp4', 'webm', 'ogg'];
+      const fileExt = getFileExt(mediaItem);
+
+
+      if (imageExtensions.includes(fileExt)) {
+        const img = document.createElement('img');
+        img.src = mediaItem;
+        mediaContainer.appendChild(img);
+      }
+      else if (videoExtensions.includes(fileExt)) {
+        const video = document.createElement('video');
+        video.src = mediaItem;
+        video.controls = true;
+        mediaContainer.appendChild(video);
+      }
+    }
+
+    function getFileExt(filename) {
+      return filename.split('.').pop().toLowerCase();
+    }
 		
-		updateImage();
+		updateMedia();
 	</script>
 </body>
 </html>
