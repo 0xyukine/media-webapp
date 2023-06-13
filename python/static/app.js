@@ -1,9 +1,17 @@
 var mediaItems = [];
 
-fetch('/get_images', {method: 'GET'})
-    .then(response => response.json())
-    .then(data => {mediaItems = data;})
-    .then(data => {console.log(data)})
+// fetch('/get_images', {method: 'GET'})
+//     .then(response => response.json())
+//     .then(data => {mediaItems = data;})
+//     .then(data => {console.log(data);
+//         updateMedia();})
+
+async function startFetch() {
+    const response = await fetch('/get_images', {method: 'GET'});
+    mediaItems = await response.json();
+    console.log(mediaItems)
+    updateMedia()
+}
 
 let currentIndex = 0;
 
@@ -54,4 +62,4 @@ function getFileExt(filename) {
     return filename.split('.').pop().toLowerCase();
 }
 
-updateMedia();
+startFetch();

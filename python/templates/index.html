@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Media Server</title>
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.jpg')}}">
 	<style>
 		.media-container {
 			display: flex;
@@ -30,12 +31,6 @@
 </head>
 <body>
 	<h1>Media server</h1>
-	<!-- <div class="image-container">
-		<img id="currentImage" src="" alt="Image">
-		<video id="myVideo" controls autoplay>
-			<source id="currentImage" src="" alt="Video" type=video/mp4>
-		</video>
-	</div> -->
 
 	<div class="media-container" id="mediaContainer"></div>
 	
@@ -43,11 +38,8 @@
 		<button id="previousButton">Previous</button>
 		<button id="nextButton">Next</button>
 	</div>
-	
 
-	<!-- <script src="hammer.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-	<!-- <script src="app.js"></script> -->
 	<script src="{{ url_for('static', filename='app.js')}}"></script>
 </body>
 </html>
