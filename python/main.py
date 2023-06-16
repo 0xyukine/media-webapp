@@ -18,6 +18,13 @@ class DirObject:
             self.type = "dir"
         else:
             self.type = "unkown"
+        
+        if obj.endswith(('jpg', 'jpeg', 'png')):
+            self.media = "image"
+        elif obj.endswith(('mp4', 'webm', 'ogg')):
+            self.media = "video"
+        else:
+            self.media = "unknown"
 
 @app.route('/')
 def test():
