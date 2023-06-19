@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="col-20">
+        <h1>test</h1><button id="galleryButton">Gallery</button>
+    </div>
+    <div class="col-03 filebar">
+        <ul>
+            {% for item in dir_list %}
+                {% if item.type == "file" %}
+                    <li><a href="/f{{item.fp_obj}}">File: {{item.name}} Path: {{item.path}}</a></li>
+                {% elif item.type == "dir" %}
+                    <li><a href="/f{{item.fp_obj}}">Folder: {{item.name}} Path: {{item.path}}</a></li>
+                {% else %}
+                    <li><a href="/f{{ file_path }}/{{item.name}}">Unknown: {{ item.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-15 filediv">
+        {% for item in dir_list %}
+            {% if item.type == "file" %}
+                <div class="col-05">
+                    {% if item.media == "image" %}
+                        <img src="/f{{item.fp_obj}}">
+                    {% elif item.media == "video" %}
+                        <video controls>
+                            <source src="/f{{item.fp_obj}}">
+                        </video>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <script src="{{ url_for('static', filename='gallery.js')}}"></script>
+</body>

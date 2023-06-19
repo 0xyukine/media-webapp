@@ -45,6 +45,29 @@ video {
     'filelist footer footer footer';
 }
 
+.gallery {
+    z-index: 30;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.galleryViewport {
+    padding: 100px 400px 50px;
+}
+
+.galleryNavigation {
+    text-align: center;
+}
+
+.filebar {
+    height: 100%;
+    word-wrap: break-word;
+}
+
 .row::after {
     content:"";
     clear: both;
