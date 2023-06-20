@@ -19,27 +19,37 @@ async function showGallery() {
     gallery.setAttribute('id', 'gallery');
     document.body.appendChild(gallery);
 
+    const galleryLeft = document.createElement('div');
+    galleryLeft.classList.add('galleryLeft', 'col-01');
+    galleryLeft.setAttribute('id', 'galleryLeft');
+    gallery.appendChild(galleryLeft)
+
     const galleryViewport = document.createElement('div');
-    galleryViewport.classList.add('galleryViewport');
+    galleryViewport.classList.add('galleryViewport', 'col-18');
     galleryViewport.setAttribute('id', 'galleryViewport');
     gallery.appendChild(galleryViewport);
+
+    const galleryRight = document.createElement('div');
+    galleryRight.classList.add('galleryRight', 'col-01');
+    galleryRight.setAttribute('id', 'galleryRight');
+    gallery.appendChild(galleryRight)
 
     const galleryNavigation = document.createElement('div');
     galleryNavigation.classList.add('galleryNavigation');
     galleryNavigation.setAttribute('id', 'galleryNavigation');
     gallery.appendChild(galleryNavigation)
 
-    const previousButton = document.createElement('button');
-    previousButton.classList.add('previousButton');
-    previousButton.setAttribute('id', 'previousButton');
-    previousButton.innerText = "Previous";
-    galleryNavigation.appendChild(previousButton);
+    // const previousButton = document.createElement('button');
+    // previousButton.classList.add('previousButton');
+    // previousButton.setAttribute('id', 'previousButton');
+    // previousButton.innerText = "Previous";
+    // galleryLeft.appendChild(previousButton);
 
-    const nextButton = document.createElement('button');
-    nextButton.classList.add('nextButton');
-    nextButton.setAttribute('id', 'nextButton');
-    nextButton.innerText = "Next";
-    galleryNavigation.appendChild(nextButton);
+    // const nextButton = document.createElement('button');
+    // nextButton.classList.add('nextButton');
+    // nextButton.setAttribute('id', 'nextButton');
+    // nextButton.innerText = "Next";
+    // galleryRight.appendChild(nextButton);
 
     const image = document.createElement('img');
     image.src = "";
@@ -47,10 +57,23 @@ async function showGallery() {
     image.setAttribute('id', 'galleryImage');
     galleryViewport.appendChild(image);
 
-    previousButton.addEventListener('click', showPreviousMedia);
-    nextButton.addEventListener('click', showNextMedia);
+    galleryLeft.addEventListener('click', showPreviousMedia);
+    galleryRight.addEventListener('click', showNextMedia);
 
-    startFetch()
+    const hammer = new Hammer(document.body);
+    hammer.get('swipe').set({direction: Hammer.DIRECTION_HORIZONTAL});
+    hammer.on('swipeleft', showNextMedia);
+    hammer.on('swiperight', showPreviousMedia);
+
+    // let key = event.key;
+    // if (key == "a") {
+    //     console.log("haohofashfo")
+    //     showPreviousMedia();
+    // } else if (key == "d") {
+    //     showNextMedia();
+    // }
+
+    startFetch();
 }
 
 function removeGallery() {
