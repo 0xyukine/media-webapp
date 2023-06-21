@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
+    <title></title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.jpg')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -11,9 +13,9 @@
         <ul>
             {% for item in dir_list %}
                 {% if item.type == "file" %}
-                    <li><a href="/f{{item.fp_obj}}">File: {{item.name}} Path: {{item.path}}</a></li>
+                    <li><a href="/f{{item.fp_obj}}">{{item.name}}</a></li>
                 {% elif item.type == "dir" %}
-                    <li><a href="/f{{item.fp_obj}}">Folder: {{item.name}} Path: {{item.path}}</a></li>
+                    <li><a href="/f{{item.fp_obj}}">{{item.name}}/</a></li>
                 {% else %}
                     <li><a href="/f{{ file_path }}/{{item.name}}">Unknown: {{ item.name }}</a></li>
                 {% endif %}

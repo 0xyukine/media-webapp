@@ -11,6 +11,16 @@ document.body.addEventListener('click', function(event) {
     };
 });
 
+document.addEventListener('keydown', function(event) {
+    if (document.getElementById('gallery')) {
+        if (event.key == 'ArrowLeft') {
+            showPreviousMedia();
+        } else if (event.key == 'ArrowRight') {
+            showNextMedia();
+        }
+    }
+});
+
 async function showGallery() {
     currentIndex = 0;
 
@@ -39,18 +49,6 @@ async function showGallery() {
     galleryNavigation.setAttribute('id', 'galleryNavigation');
     gallery.appendChild(galleryNavigation)
 
-    // const previousButton = document.createElement('button');
-    // previousButton.classList.add('previousButton');
-    // previousButton.setAttribute('id', 'previousButton');
-    // previousButton.innerText = "Previous";
-    // galleryLeft.appendChild(previousButton);
-
-    // const nextButton = document.createElement('button');
-    // nextButton.classList.add('nextButton');
-    // nextButton.setAttribute('id', 'nextButton');
-    // nextButton.innerText = "Next";
-    // galleryRight.appendChild(nextButton);
-
     const image = document.createElement('img');
     image.src = "";
     image.classList.add('galleryImage');
@@ -64,14 +62,6 @@ async function showGallery() {
     hammer.get('swipe').set({direction: Hammer.DIRECTION_HORIZONTAL});
     hammer.on('swipeleft', showNextMedia);
     hammer.on('swiperight', showPreviousMedia);
-
-    // let key = event.key;
-    // if (key == "a") {
-    //     console.log("haohofashfo")
-    //     showPreviousMedia();
-    // } else if (key == "d") {
-    //     showNextMedia();
-    // }
 
     startFetch();
 }
