@@ -22,6 +22,30 @@ video {
     max-width: 100%;
 }
 
+/* li::before {
+    content: "\f15b";
+} */
+
+ul {
+    text-align: left;
+}
+
+ul li {
+    padding-left: 20px;
+}
+
+ul li.file::marker {
+    content: '';
+    font-family: 'Font Awesome\ 6 Free';
+    font-weight: 200;
+}
+
+ul li.folder::marker {
+    content: '';
+    font-family: 'Font Awesome\ 6 Free';
+    font-weight: 200;
+}
+
 .header {
     grid-area: header;
     padding: 30px;

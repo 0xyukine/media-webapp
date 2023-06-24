@@ -3,7 +3,9 @@
     <title></title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.jpg')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{url_for('static', filename='fonts/fontawesome-free-6.4.0-web/css/fontawesome.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='fonts/fontawesome-free-6.4.0-web/css/brands.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='fonts/fontawesome-free-6.4.0-web/css/solid.css')}}" rel="stylesheet">
 </head>
 <body>
     <div class="col-20">
@@ -13,9 +15,9 @@
         <ul>
             {% for item in dir_list %}
                 {% if item.type == "file" %}
-                    <li><a href="/f{{item.fp_obj}}">{{item.name}}</a></li>
+                    <li class="file"><a href="/f{{item.fp_obj}}">{{item.name}}</a></li>
                 {% elif item.type == "dir" %}
-                    <li><a href="/f{{item.fp_obj}}">{{item.name}}/</a></li>
+                    <li class="folder"><a href="/f{{item.fp_obj}}">{{item.name}}/</a></li>
                 {% else %}
                     <li><a href="/f{{ file_path }}/{{item.name}}">Unknown: {{ item.name }}</a></li>
                 {% endif %}

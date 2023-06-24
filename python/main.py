@@ -4,6 +4,7 @@ import os
 file_root ='/mnt/e/Stuff/'
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 class DirObject:
     def __init__(self, obj, path):
